@@ -1,0 +1,4 @@
+github.com/NaySoftware/go-fcm v0.0.0-20190516140123-808e978ddcd2 h1:0hjpEzUWez7uca/CUBhfidfotTCCI5fsj6Nb+TW5DLg=
+github.com/NaySoftware/go-fcm v0.0.0-20190516140123-808e978ddcd2/go.mod h1:3qVrdgWvoMZMoRG+/nusrCNrcP4RYU4MWGv467XjqLI=
+github.com/gorilla/websocket v1.4.2 h1:+/TMaTYc4QFitKJxsQ7Yye35DkWvkdLcvGKqM+x0Ufc=
+github.com/gorilla/websocket v1.4.2/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
