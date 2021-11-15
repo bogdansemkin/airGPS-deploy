@@ -9,3 +9,7 @@
 
 `port: 4001`
 `ip: 192.168.88.175`
+
+<h3>If u wanna update ur .exe build, please, use command: </h3>
+ 
+ `go build  gpsfcm.go gpstools.go grreact.go jsdecode.go main.go sockws.go`
