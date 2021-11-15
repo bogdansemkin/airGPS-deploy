@@ -323,7 +323,10 @@ func clearOldAlarmList() { //CLEAR NOT VALID ALARMS
 func decodeAlarmList(jsonIncoming []byte) {
 	var (
 		alarms Alarms
+		client http.Client
+		request *http.Request
 	)
+
 	newAlarmList := string(jsonIncoming)
 
 	if lastAlarmList != newAlarmList && len(newAlarmList) > 10 {
@@ -381,7 +384,22 @@ func decodeAlarmList(jsonIncoming []byte) {
 							string(34) + "f_region" + string(34) + ":" + string(34) + alarms.Alarms[i].Region + string(34) + "}" + "]" + "}"
 					*/
 				}
+				if request != nil {
+					response, err := client.Do(request)
+					if err != nil {
+						fmt.Println("HTTP call failed: ", err)
+						return
+					}
+					defer response.Body.Close()
 
+					if response.StatusCode == http.StatusNotFound {
+						s_json := "{" + getQuatedJSON("cmnd", "404_Error", 1) + ","
+						s_json = s_json + getQuatedJSON("f_object_adress", alarms.Alarms[i].ObjectAdress, 1) + ","
+						s_json = s_json + getQuatedJSON("f_object_name", alarms.Alarms[i].ObjectName, 1) + ","
+						s_json = s_json + getQuatedJSON("f_region", alarms.Alarms[i].Region, 1)
+						s_json = s_json + "}" //+ string(0x0D) + string(0x0A)
+					}
+				}
 			} else { //GBR WAS CHANGED
 				i_GBR_ID := alarms.Alarms[i].IdGBR
 				s_GBR_NAME := alarms.Alarms[i].GbrNumber
@@ -561,11 +579,11 @@ func decodeGbrCard(cardPos int, jsonIncoming []byte) {
 func getQueryLink(accUIN string) (int, string) {
 
 	if len(gbrListID) == 0 {
-		return 0, "http://api-cs.ohholding.com.ua/gbr_list/get"
+		return 0, "https://api-cs.ohholding.com.ua/gbr_list/get"
 	} else if len(accUIN) > 3 {
-		return 2, "http://api-cs.ohholding.com.ua/object_cart/" + accUIN + "/get"
+		return 2, "https://api-cs.ohholding.com.ua/object_cart/" + accUIN + "/get"
 	}
-	return 1, "http://api-cs.ohholding.com.ua/active_workings/get"
+	return 1, "https://api-cs.ohholding.com.ua/active_workings/get"
 
 }
 
