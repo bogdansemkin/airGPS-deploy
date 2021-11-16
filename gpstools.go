@@ -410,7 +410,6 @@ func updateGBRstatus(update_GBR_id, update_CMD, update_GEO string, update_GBR_st
 			s_update_GEO = "X0Y0"
 		}
 	}
-
 	s_QUERY := "https://api-cs.ohholding.com.ua/api/set-status?status=" + update_CMD +
 		"&param=" + s_update_GEO + "&id=" + strconv.Itoa(i_iden) //+ "application/json"
 	fmt.Println("Post send", time.Now(), s_QUERY)
