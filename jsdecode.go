@@ -572,7 +572,6 @@ func decodeGbrCard(cardPos int, jsonIncoming []byte) {
 		}
 
 	}
-
 }
 
 //======================== HTTP FUNCTIONS ======================================
