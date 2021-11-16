@@ -415,7 +415,6 @@ func updateGBRstatus(update_GBR_id, update_CMD, update_GEO string, update_GBR_st
 	fmt.Println("Post send", time.Now(), s_QUERY)
 	postUpdateParams(s_QUERY)
 }
-
 //------------------------------------------------------------------------------
 func getObjGeneral(objUIN int) string {
 	s_json := ""
