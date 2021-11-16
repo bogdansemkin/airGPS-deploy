@@ -403,7 +403,6 @@ func updateGBRstatus(update_GBR_id, update_CMD, update_GEO string, update_GBR_st
 		} else if update_GBR_status == 5 {
 			//NOTHING
 		}
-
 	}
 	s_update_GEO := update_GEO
 	if update_GBR_status < 3 {
