@@ -323,8 +323,6 @@ func clearOldAlarmList() { //CLEAR NOT VALID ALARMS
 func decodeAlarmList(jsonIncoming []byte) {
 	var (
 		alarms Alarms
-		client http.Client
-		request *http.Request
 	)
 
 	newAlarmList := string(jsonIncoming)
@@ -383,22 +381,6 @@ func decodeAlarmList(jsonIncoming []byte) {
 							string(34) + "f_object_name" + string(34) + ":" + string(34) + alarms.Alarms[i].ObjectName + string(34) + "," +
 							string(34) + "f_region" + string(34) + ":" + string(34) + alarms.Alarms[i].Region + string(34) + "}" + "]" + "}"
 					*/
-				}
-				if request != nil {
-					response, err := client.Do(request)
-					if err != nil {
-						fmt.Println("HTTP call failed: ", err)
-						return
-					}
-					defer response.Body.Close()
-
-					if response.StatusCode == http.StatusNotFound {
-						s_json := "{" + getQuatedJSON("cmnd", "404_Error", 1) + ","
-						s_json = s_json + getQuatedJSON("f_object_adress", alarms.Alarms[i].ObjectAdress, 1) + ","
-						s_json = s_json + getQuatedJSON("f_object_name", alarms.Alarms[i].ObjectName, 1) + ","
-						s_json = s_json + getQuatedJSON("f_region", alarms.Alarms[i].Region, 1)
-						s_json = s_json + "}" //+ string(0x0D) + string(0x0A)
-					}
 				}
 			} else { //GBR WAS CHANGED
 				i_GBR_ID := alarms.Alarms[i].IdGBR
